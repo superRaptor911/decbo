@@ -18,15 +18,24 @@ export async function registerUser(username, email, phone) {
   }
 }
 
-export async function addRoom(name, city, state, country) {
+export async function addRoom(
+  name,
+  city,
+  state,
+  country,
+  description,
+  roomCapacity,
+) {
   const web3 = await getWeb3();
   const contract = await initContract(RoomContract, web3);
   const addresses = await web3.eth.getAccounts();
 
   try {
-    await contract.methods.addRoom(name, city, state, country).send({
-      from: addresses[0],
-    });
+    await contract.methods
+      .addRoom(name, city, state, country, description, roomCapacity)
+      .send({
+        from: addresses[0],
+      });
   } catch (e) {
     /* handle error */
     console.error('api::Failed to add room', e);
