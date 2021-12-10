@@ -13,15 +13,28 @@ const AddRoom = () => {
   const cityRef = useRef();
   const stateRef = useRef();
   const countryRef = useRef();
+  const descriptionRef = useRef();
+  const roomCapacityRef = useRef();
+  const mediaRef = useRef();
 
   const handleSubmit = async () => {
     const name = nameRef.current.value;
     const city = cityRef.current.value;
     const state = stateRef.current.value;
     const country = countryRef.current.value;
+    const description = descriptionRef.current.value;
+    const roomCapacity = roomCapacityRef.current.value;
+    const files = mediaRef.current.value;
 
     try {
-      const result = await addRoom(name, city, state, country);
+      // const result = await addRoom(
+      //   name,
+      //   city,
+      //   state,
+      //   country,
+      //   description,
+      //   roomCapacity,
+      // );
     } catch (e) {
       console.error('AddRoom::Error', e);
     }
@@ -47,6 +60,26 @@ const AddRoom = () => {
         <div style={{marginTop: 40}} />
         <Input placeholder="Country" inputRef={countryRef} />
         <div style={{marginTop: 40}} />
+        <Input placeholder="Description" inputRef={descriptionRef} />
+        <div style={{marginTop: 40}} />
+        <Input
+          placeholder="Room Capacity"
+          type="number"
+          inputRef={roomCapacityRef}
+        />
+        <div style={{marginTop: 40}} />
+
+        <input
+          type="file"
+          id="myFile"
+          name="filename"
+          multiple
+          accept="image/*"
+          ref={mediaRef}
+        />
+
+        <div style={{marginTop: 40}} />
+
         <Button variant="contained" onClick={handleSubmit}>
           Submit
         </Button>
