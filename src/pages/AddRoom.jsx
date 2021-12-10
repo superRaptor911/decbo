@@ -17,6 +17,11 @@ const AddRoom = () => {
   const roomCapacityRef = useRef();
   const mediaRef = useRef();
 
+  const onFilesSelected = e => {
+    mediaRef.current = e.target.files;
+    console.log(e.target.files);
+  };
+
   const handleSubmit = async () => {
     const name = nameRef.current.value;
     const city = cityRef.current.value;
@@ -24,7 +29,8 @@ const AddRoom = () => {
     const country = countryRef.current.value;
     const description = descriptionRef.current.value;
     const roomCapacity = roomCapacityRef.current.value;
-    const files = mediaRef.current.value;
+    const files = mediaRef.current;
+    console.log(files[0]);
 
     try {
       // const result = await addRoom(
@@ -75,7 +81,7 @@ const AddRoom = () => {
           name="filename"
           multiple
           accept="image/*"
-          ref={mediaRef}
+          onChange={onFilesSelected}
         />
 
         <div style={{marginTop: 40}} />
