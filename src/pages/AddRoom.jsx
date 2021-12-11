@@ -5,8 +5,7 @@ import Button from '@mui/material/Button';
 import {Link, useHistory} from 'react-router-dom';
 import {ROUTES} from '../Routes';
 import Alert from '@mui/material/Alert';
-import {addRoom, uploadFiles} from '../api/api';
-import {ipfs} from '../webInit';
+import {addRoom, uploadFiles, uploadFilesIpfs} from '../api/api';
 
 const AddRoom = () => {
   const history = useHistory();
@@ -31,15 +30,13 @@ const AddRoom = () => {
     const description = descriptionRef.current.value;
     const roomCapacity = roomCapacityRef.current.value;
     const files = mediaRef.current;
-    const data = await uploadFiles(files);
 
+    const data = await uploadFilesIpfs(files);
     let previewImages = [];
     for (const i of data) {
-      const result = await ipfs.add(i.buffer);
-      previewImages.push({path: result.path, size: i.size, fileType: i.type});
+      previewImages.push({path: i.path});
     }
     previewImages = previewImages.slice(0, 5);
-    // console.log(previewImages);
     previewImages.map(item => {
       console.log(item);
       return item;

@@ -1,14 +1,11 @@
-import Web3 from 'web3';
 import create from 'zustand';
-import {getWeb3} from './webInit';
+import {persist} from 'zustand/middleware';
 
 let store = set => ({
-  web3: new Web3(window.ethereum),
-  loadWeb3: async () => {
-    getWeb3().then(result => {
-      set({web3: result});
-    });
+  arcanaUserInfo: null,
+  setArcanaUserInfo: data => {
+    set({arcanaUserInfo: data});
   },
 });
 
-export const useStore = create(store);
+export const useStore = create(persist(store));

@@ -1,6 +1,7 @@
-import {getWeb3, initContract} from '../webInit';
+import {getWeb3, initContract, ipfs} from '../webInit';
 import UserContact from '../contracts/UserContact.json';
 import RoomContract from '../contracts/Rooms.json';
+import {getArcanaStorage} from './arcanaAuth';
 
 export async function registerUser(username, email, phone) {
   const web3 = await getWeb3();
@@ -79,7 +80,7 @@ function readFileAsync(file) {
   });
 }
 
-export async function uploadFiles(files) {
+export async function uploadFilesIpfs(files) {
   const fileBuffers = [];
   for (let file of files) {
     const data = await readFileAsync(file);
@@ -89,5 +90,26 @@ export async function uploadFiles(files) {
       type: file.type,
     });
   }
-  return fileBuffers;
+
+  const list = [];
+  for (let file of fileBuffers) {
+    const result = await ipfs.add(file.buffer);
+    list.push(result);
+  }
+  return list;
+}
+
+export async function uploadToArcana(file) {
+  const arcanaStorage = await getArcanaStorage().getUploader();
+  const id = await arcanaStorage.upload(file);
+  return id;
+}
+
+export async function getFileFromArcana(id) {
+  const downloader = await getArcanaStorage().getDownloader();
+  downloader.download(id);
+
+  downloader.onSuccess = () => {
+    console.log('Completed file download');
+  };
 }
