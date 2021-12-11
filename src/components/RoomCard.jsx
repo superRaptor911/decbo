@@ -2,7 +2,7 @@ import { StyleSheet, css } from 'aphrodite'
 import React from 'react'
 import cardImg from '../media/images/card.png'
 import Loc from "../media/icons/location_icn.png"
-import { padding } from '@mui/system'
+import { fontSize, padding } from '@mui/system'
 
 const RoomCard = () => {
     return (
@@ -12,8 +12,8 @@ const RoomCard = () => {
                     <img src={cardImg} alt="blaah" className={css(styles.cardImage)} />
                     <div className={css(styles.cardHeading)} > Shikara Hotel </div>
                     <div className={css(styles.location)}>
-                        <img src={Loc} alt="location-icon" />
-                        <div className={css(styles.location)}>JL Asian No. 72 Yogyakarta</div>
+                        <div><img src={Loc} alt="location-icon" /></div>
+                        <div className={css(styles.locationtxt)}>JL Asian No. 72 Yogyakarta</div>
                     </div>
                     <div className={css(styles.price)}>
                     $42.72 
@@ -45,6 +45,30 @@ const styles = StyleSheet.create({
         fontWeight: 600,
         marginTop: 20
     },
+    location:{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "flex-start",
+        alignItems: "center"
+    },
+    locationtxt:{
+        color: "#A2A7B2",
+        fontSize: 15,
+        fontWeight: 500,
+        marginLeft: 8
+    },
+    price:{
+        fontSize: 25,
+        fontWeight: 600,
+    },
+    pnight:{
+        fontSize: 15,
+        fontWeight: 500,
+        color: "#A2A7B2",
+        marginTop: 16,
+        marginBottom: 19
+    },
+    
 
 })
 
