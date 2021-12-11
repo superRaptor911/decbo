@@ -1,5 +1,8 @@
 import Web3 from 'web3';
 
+import {create} from 'ipfs-http-client';
+export const ipfs = create('/ip4/127.0.0.1/tcp/5001');
+
 export async function getWeb3() {
   if (window.ethereum) {
     await window.ethereum.send('eth_requestAccounts');

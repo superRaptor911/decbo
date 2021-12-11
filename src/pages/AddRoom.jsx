@@ -5,7 +5,8 @@ import Button from '@mui/material/Button';
 import {Link, useHistory} from 'react-router-dom';
 import {ROUTES} from '../Routes';
 import Alert from '@mui/material/Alert';
-import {addRoom} from '../api/api';
+import {addRoom, uploadFiles} from '../api/api';
+import {ipfs} from '../webInit';
 
 const AddRoom = () => {
   const [error, setError] = useState('');
@@ -19,7 +20,6 @@ const AddRoom = () => {
 
   const onFilesSelected = e => {
     mediaRef.current = e.target.files;
-    console.log(e.target.files);
   };
 
   const handleSubmit = async () => {
@@ -30,17 +30,56 @@ const AddRoom = () => {
     const description = descriptionRef.current.value;
     const roomCapacity = roomCapacityRef.current.value;
     const files = mediaRef.current;
-    console.log(files[0]);
+    const data = await uploadFiles(files);
 
+    const previewImages = [
+      {
+        path: 'QmabvW1ptbF7Ux3ravE8FSoUXHinfufbm6V8HnKvDDrxaC',
+        size: 768174,
+        fileType: 'image/jpeg',
+      },
+      {
+        path: 'QmXQdddWPsUegTXWTv9zgbk8bzsEPvwChaLXXJ3tkrJgzL',
+        size: 3596662,
+        fileType: 'image/jpeg',
+      },
+      {
+        path: 'QmQJuk4FqDWthQBSXv8EVRTfwmFUhi634vFGgdptgASMqs',
+        size: 247191,
+        fileType: 'image/jpeg',
+      },
+      {
+        path: 'QmabzZwzZ36rR9Ycw8EWHpG7wnxxFmBBDim56tNVoDJGyK',
+        size: 325247,
+        fileType: 'image/jpeg',
+      },
+      {
+        path: 'QmT1vBNSrdHxwSush6JGyx1asS1QL3kr3KBnCUcQNiz1Mr',
+        size: 167627,
+        fileType: 'image/jpeg',
+      },
+    ];
+
+    // for (const i of data) {
+    //   const result = await ipfs.add(i.buffer);
+    //   previewImages.push({path: result.path, size: i.size, fileType: i.type});
+    // }
+    // previewImages = previewImages.slice(0, 5);
+    // console.log(previewImages);
+    previewImages.map(item => {
+      console.log(item);
+      return item;
+    });
     try {
-      // const result = await addRoom(
-      //   name,
-      //   city,
-      //   state,
-      //   country,
-      //   description,
-      //   roomCapacity,
-      // );
+      const result = await addRoom(
+        name,
+        city,
+        state,
+        country,
+        description,
+        roomCapacity,
+        previewImages,
+      );
     } catch (e) {
       console.error('AddRoom::Error', e);
     }

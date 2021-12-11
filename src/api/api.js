@@ -25,6 +25,7 @@ export async function addRoom(
   country,
   description,
   roomCapacity,
+  previewImages,
 ) {
   const web3 = await getWeb3();
   const contract = await initContract(RoomContract, web3);
@@ -32,7 +33,15 @@ export async function addRoom(
 
   try {
     await contract.methods
-      .addRoom(name, city, state, country, description, roomCapacity)
+      .addRoom(
+        name,
+        city,
+        state,
+        country,
+        description,
+        roomCapacity,
+        previewImages[0],
+      )
       .send({
         from: addresses[0],
       });
@@ -55,4 +64,30 @@ export async function getLatestRooms(page = 0) {
     console.error('api::Failed to get latest room', e);
     throw 'FAILED TO Get rooms';
   }
+}
+
+function readFileAsync(file) {
+  return new Promise((resolve, reject) => {
+    let reader = new FileReader();
+
+    reader.onload = () => {
+      resolve(reader.result);
+    };
+
+    reader.onerror = reject;
+    reader.readAsArrayBuffer(file);
+  });
+}
+
+export async function uploadFiles(files) {
+  const fileBuffers = [];
+  for (let file of files) {
+    const data = await readFileAsync(file);
+    fileBuffers.push({
+      buffer: data,
+      size: file.size,
+      type: file.type,
+    });
+  }
+  return fileBuffers;
 }
