@@ -9,6 +9,7 @@ import {addRoom, uploadFiles} from '../api/api';
 import {ipfs} from '../webInit';
 
 const AddRoom = () => {
+  const history = useHistory();
   const [error, setError] = useState('');
   const nameRef = useRef();
   const cityRef = useRef();
@@ -32,39 +33,12 @@ const AddRoom = () => {
     const files = mediaRef.current;
     const data = await uploadFiles(files);
 
-    const previewImages = [
-      {
-        path: 'QmabvW1ptbF7Ux3ravE8FSoUXHinfufbm6V8HnKvDDrxaC',
-        size: 768174,
-        fileType: 'image/jpeg',
-      },
-      {
-        path: 'QmXQdddWPsUegTXWTv9zgbk8bzsEPvwChaLXXJ3tkrJgzL',
-        size: 3596662,
-        fileType: 'image/jpeg',
-      },
-      {
-        path: 'QmQJuk4FqDWthQBSXv8EVRTfwmFUhi634vFGgdptgASMqs',
-        size: 247191,
-        fileType: 'image/jpeg',
-      },
-      {
-        path: 'QmabzZwzZ36rR9Ycw8EWHpG7wnxxFmBBDim56tNVoDJGyK',
-        size: 325247,
-        fileType: 'image/jpeg',
-      },
-      {
-        path: 'QmT1vBNSrdHxwSush6JGyx1asS1QL3kr3KBnCUcQNiz1Mr',
-        size: 167627,
-        fileType: 'image/jpeg',
-      },
-    ];
-
-    // for (const i of data) {
-    //   const result = await ipfs.add(i.buffer);
-    //   previewImages.push({path: result.path, size: i.size, fileType: i.type});
-    // }
-    // previewImages = previewImages.slice(0, 5);
+    let previewImages = [];
+    for (const i of data) {
+      const result = await ipfs.add(i.buffer);
+      previewImages.push({path: result.path, size: i.size, fileType: i.type});
+    }
+    previewImages = previewImages.slice(0, 5);
     // console.log(previewImages);
     previewImages.map(item => {
       console.log(item);
@@ -80,6 +54,7 @@ const AddRoom = () => {
         roomCapacity,
         previewImages,
       );
+      history.push(ROUTES.dashboard.path);
     } catch (e) {
       console.error('AddRoom::Error', e);
     }

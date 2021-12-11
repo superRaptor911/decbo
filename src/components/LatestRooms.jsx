@@ -1,5 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import {getLatestRooms} from '../api/api';
+import RoomCard from './RoomCard';
 
 const LatestRooms = () => {
   const [rooms, setRooms] = useState([]);
@@ -11,20 +12,17 @@ const LatestRooms = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Latest Rooms</h2>
+    <Fragment>
       {rooms.map(item => (
-        <div key={item.id}>
-          <p>{item.name}</p>
-          <p>{item.city}</p>
-          <img
-            src={'http://127.0.0.1:8080/ipfs/' + item.previewImage1.path}
-            alt="gg"
-            style={{width: 200, height: 'auto'}}
-          />
-        </div>
+        <RoomCard
+          name={item.name}
+          location={item.city + ',' + item.state + ',' + item.country}
+          previewImage={'http://127.0.0.1:8080/ipfs/' + item.previewImage1.path}
+          key={item.id}
+          price={'$100'}
+        />
       ))}
-    </div>
+    </Fragment>
   );
 };
 

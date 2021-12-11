@@ -4,8 +4,8 @@ import {useHistory} from 'react-router';
 import {ROUTES} from '../Routes';
 import {getWeb3, initContract} from '../webInit';
 import UserContract from '../contracts/UserContact.json';
-import HomeImg from "../media/images/Home.png"
-import { StyleSheet, css } from 'aphrodite';
+import HomeImg from '../media/images/Home.png';
+import {StyleSheet, css} from 'aphrodite';
 
 const Home = () => {
   const history = useHistory();
@@ -30,58 +30,65 @@ const Home = () => {
   return (
     <div className={css(styles.root)}>
       <div className={css(styles.container)}>
-      <div className={css(styles.lContent)}>
+        <div className={css(styles.lContent)}>
           <div className={css(styles.contents)}>
-          <div className={css(styles.heading)}>Welcome to Decbo</div>
-              <div className={css(styles.content)}>Ready to Explore........</div>
-              <button className={css(styles.button)} onClick={handleGetStared}> Sign up </button>
-              </div>
+            <div className={css(styles.heading)}>Welcome to Decbo</div>
+            <div className={css(styles.content)}>Ready to Explore........</div>
+            <button className={css(styles.button)} onClick={handleGetStared}>
+              Get Started
+            </button>
           </div>
-          <div className={css(styles.rContent)}>
-            <img src={HomeImg} alt="homeImg" />
-          </div>
+        </div>
+        <div className={css(styles.rContent)}>
+          <img
+            src={HomeImg}
+            alt="homeImg"
+            style={{height: '100vh', width: '50vw'}}
+          />
+        </div>
       </div>
     </div>
   );
 };
 
 const styles = StyleSheet.create({
-  root:{
-    background: "#FAFAFA",
-    height: "100vh"
+  root: {
+    background: '#FAFAFA',
+    height: '100vh',
+    overflowY: 'hidden',
   },
   container: {
-    display: "flex",
-    flexDirection: "row"
+    display: 'flex',
+    flexDirection: 'row',
   },
-  lContent:{
-    display: "flex",
-    flexDirection: "column",
-    width: "50%",
-    justifyContent: "center",
-    alignItems: "center"
+  lContent: {
+    display: 'flex',
+    flexDirection: 'column',
+    width: '50%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  heading:{
+  heading: {
     fontSize: 45,
     fontWeight: 600,
-    marginBottom: 39
+    marginBottom: 39,
   },
   content: {
-    fontSize: 30
+    fontSize: 30,
   },
-  button:{
+  button: {
     width: 444,
     height: 62,
-    background: "#0F8BC0",
-    color: "#FFFFFF",
-    textAlign: "center",
+    background: '#0F8BC0',
+    color: '#FFFFFF',
+    textAlign: 'center',
     fontSize: 24,
     fontWeight: 600,
     borderRadius: 20,
-    border:"none",
+    border: 'none',
     marginTop: 57,
-    cursor: "pointer"
-  }
-})
+    cursor: 'pointer',
+  },
+});
 
 export default Home;
