@@ -9,19 +9,20 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
 endif
 set shortmess=aoO
 badd +18 App.js
-badd +28 pages/AddRoom.jsx
-badd +32 api/api.js
+badd +35 pages/AddRoom.jsx
+badd +81 api/api.js
+badd +4 webInit.js
 argglobal
 %argdel
-edit pages/AddRoom.jsx
+edit webInit.js
 argglobal
-balt api/api.js
-let s:l = 66 - ((24 * winheight(0) + 22) / 45)
+balt pages/AddRoom.jsx
+let s:l = 4 - ((3 * winheight(0) + 22) / 45)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 66
-normal! 036|
+keepjumps 4
+normal! 052|
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0&& getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

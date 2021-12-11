@@ -17,6 +17,11 @@ const LatestRooms = () => {
         <div key={item.id}>
           <p>{item.name}</p>
           <p>{item.city}</p>
+          <img
+            src={'http://127.0.0.1:8080/ipfs/' + item.previewImage1.path}
+            alt="gg"
+            style={{width: 200, height: 'auto'}}
+          />
         </div>
       ))}
     </div>
