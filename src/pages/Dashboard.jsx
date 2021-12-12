@@ -21,7 +21,7 @@ const Dashboard = () => {
             width: '100%',
           }}>
           <div className={css(styles.right)}>
-            <div className={css(styles.loading)}>Lodging Available</div>
+            <div className={css(styles.loading)}>Rooms</div>
             <div className={css(styles.rcards)}>
               <LatestRooms />
             </div>
@@ -45,8 +45,9 @@ const styles = StyleSheet.create({
   },
   loading: {
     fontWeight: 600,
-    fontSize: 25,
+    fontSize: 40,
     marginBottom: 15,
+    textDecoration: 'underline',
   },
   rcards: {
     display: 'flex',

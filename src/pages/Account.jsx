@@ -31,15 +31,25 @@ const MediaForArcana = () => {
 
   return (
     <div>
-      <input type="file" multiple onChange={onFilesSelected} />
-
-      <button className={css(styles.button)} onClick={handleUpload}>
-        Upload
-      </button>
+      <div
+        style={{
+          margin: 20,
+          backgroundColor: '#f4f4f4',
+          padding: 10,
+          borderRadius: 4,
+        }}>
+        <p>Upload Your Files</p>
+        <input type="file" multiple onChange={onFilesSelected} />
+        <button className={css(styles.button)} onClick={handleUpload}>
+          Upload
+        </button>
+      </div>
 
       <div>
         {arcanaFiles.map(item => (
-          <div key={item}>
+          <div
+            key={item}
+            style={{padding: 20, backgroundColor: 'lightgrey', margin: 10}}>
             <p> {item} </p>
             <button
               onClick={() => {

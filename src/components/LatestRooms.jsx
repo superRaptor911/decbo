@@ -20,6 +20,13 @@ const LatestRooms = () => {
       uiSetSelectedRoom(selectedRoom);
     }
   }, [selectedRoom]);
+  if (rooms.length) {
+    return (
+      <div>
+        <h3>No Rooms available [-_-]</h3>
+      </div>
+    );
+  }
 
   return (
     <Fragment>

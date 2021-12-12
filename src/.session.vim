@@ -10,30 +10,32 @@ endif
 set shortmess=aoO
 argglobal
 %argdel
-edit ~/program/dapps/decbo/src/components/BookRoom.jsx
+edit pages/Account.jsx
 argglobal
-balt pages/AddRoom.jsx
-let s:l = 9 - ((8 * winheight(0) + 22) / 45)
+balt api/api.js
+let s:l = 91 - ((30 * winheight(0) + 22) / 45)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 9
-normal! 0
+keepjumps 91
+normal! 017|
 tabnext 1
-badd +37 App.js
-badd +26 pages/AddRoom.jsx
-badd +90 api/api.js
+badd +37 components/BookRoom.jsx
+badd +80 pages/AddRoom.jsx
+badd +33 App.js
+badd +140 api/api.js
 badd +4 webInit.js
 badd +47 components/RoomCard.jsx
-badd +88 pages/Dashboard.jsx
-badd +17 components/LatestRooms.jsx
+badd +16 pages/Dashboard.jsx
+badd +16 components/LatestRooms.jsx
 badd +75 pages/Register.jsx
 badd +2 pages/Home.jsx
 badd +37 api/arcanaAuth.js
-badd +22 pages/GithApp.jsx
+badd +8 pages/GithApp.jsx
 badd +10 pages/ArcanaRedirect.jsx
 badd +10 store.js
-badd +9 ~/program/dapps/decbo/src/components/BookRoom.jsx
+badd +39 pages/Account.jsx
+badd +24 components/LeftNav.jsx
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif
