@@ -8,8 +8,20 @@ if expand('%') == '' && !&modified && line('$') <= 1 && getline(1) == ''
   let s:wipebuf = bufnr('%')
 endif
 set shortmess=aoO
+argglobal
+%argdel
+edit ~/program/dapps/decbo/src/components/BookRoom.jsx
+argglobal
+balt pages/AddRoom.jsx
+let s:l = 9 - ((8 * winheight(0) + 22) / 45)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 9
+normal! 0
+tabnext 1
 badd +37 App.js
-badd +45 pages/AddRoom.jsx
+badd +26 pages/AddRoom.jsx
 badd +90 api/api.js
 badd +4 webInit.js
 badd +47 components/RoomCard.jsx
@@ -21,19 +33,8 @@ badd +37 api/arcanaAuth.js
 badd +22 pages/GithApp.jsx
 badd +10 pages/ArcanaRedirect.jsx
 badd +10 store.js
-argglobal
-%argdel
-edit pages/AddRoom.jsx
-argglobal
-balt api/api.js
-let s:l = 91 - ((44 * winheight(0) + 22) / 45)
-if s:l < 1 | let s:l = 1 | endif
-keepjumps exe s:l
-normal! zt
-keepjumps 91
-normal! 013|
-tabnext 1
-if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0&& getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
+badd +9 ~/program/dapps/decbo/src/components/BookRoom.jsx
+if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf
 endif
 unlet! s:wipebuf

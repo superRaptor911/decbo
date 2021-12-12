@@ -16,6 +16,7 @@ const AddRoom = () => {
   const countryRef = useRef();
   const descriptionRef = useRef();
   const roomCapacityRef = useRef();
+  const priceRef = useRef();
   const mediaRef = useRef();
 
   const onFilesSelected = e => {
@@ -29,12 +30,13 @@ const AddRoom = () => {
     const country = countryRef.current.value;
     const description = descriptionRef.current.value;
     const roomCapacity = roomCapacityRef.current.value;
+    const price = priceRef.current.value;
     const files = mediaRef.current;
 
     const data = await uploadFilesIpfs(files);
     let previewImages = [];
     for (const i of data) {
-      previewImages.push({path: i.path});
+      previewImages.push(i.path);
     }
     previewImages = previewImages.slice(0, 5);
     previewImages.map(item => {
@@ -49,6 +51,7 @@ const AddRoom = () => {
         country,
         description,
         roomCapacity,
+        price,
         previewImages,
       );
       history.push(ROUTES.dashboard.path);
@@ -59,7 +62,7 @@ const AddRoom = () => {
 
   return (
     <div>
-      <h2 style={{textAlign: 'center', marginTop: 100}}>Add Room</h2>
+      <h2 style={{textAlign: 'center', marginTop: 50}}>Add Room</h2>
       <Paper
         style={{
           maxWidth: 500,
@@ -67,7 +70,7 @@ const AddRoom = () => {
           display: 'flex',
           flexDirection: 'column',
           padding: 20,
-          marginTop: 100,
+          marginTop: 50,
         }}>
         <Input placeholder="Name" inputRef={nameRef} />
         <div style={{marginTop: 40}} />
@@ -84,6 +87,8 @@ const AddRoom = () => {
           type="number"
           inputRef={roomCapacityRef}
         />
+        <div style={{marginTop: 40}} />
+        <Input placeholder="Price" type="number" inputRef={priceRef} />
         <div style={{marginTop: 40}} />
 
         <input

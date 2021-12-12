@@ -16,10 +16,16 @@ const LatestRooms = () => {
       {rooms.map(item => (
         <RoomCard
           name={item.name}
-          location={item.city + ',' + item.state + ',' + item.country}
-          previewImage={'http://127.0.0.1:8080/ipfs/' + item.previewImage1.path}
+          location={
+            item.roomAddress.city +
+            ',' +
+            item.roomAddress.state +
+            ',' +
+            item.roomAddress.country
+          }
+          previewImage={'http://127.0.0.1:8080/ipfs/' + item.images.img1}
           key={item.id}
-          price={'$100'}
+          price={'$' + item.price}
         />
       ))}
     </Fragment>

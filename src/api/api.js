@@ -26,6 +26,7 @@ export async function addRoom(
   country,
   description,
   roomCapacity,
+  price,
   previewImages,
 ) {
   const web3 = await getWeb3();
@@ -36,12 +37,15 @@ export async function addRoom(
     await contract.methods
       .addRoom(
         name,
-        city,
-        state,
-        country,
+        {city: city, state: state, country: country},
         description,
         roomCapacity,
-        previewImages[0],
+        price,
+        {
+          img1: previewImages[0],
+          img2: previewImages[1],
+          img3: previewImages[2],
+        },
       )
       .send({
         from: addresses[0],
