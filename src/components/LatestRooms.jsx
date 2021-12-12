@@ -11,7 +11,11 @@ const LatestRooms = () => {
 
   useEffect(() => {
     getLatestRooms().then(result => {
-      setRooms(result);
+      setRooms(
+        result.filter(item => {
+          return !item.isBooked;
+        }),
+      );
     });
   }, [roomBooked]);
 
@@ -20,7 +24,8 @@ const LatestRooms = () => {
       uiSetSelectedRoom(selectedRoom);
     }
   }, [selectedRoom]);
-  if (rooms.length) {
+
+  if (rooms.length == 0) {
     return (
       <div>
         <h3>No Rooms available [-_-]</h3>
@@ -30,30 +35,26 @@ const LatestRooms = () => {
 
   return (
     <Fragment>
-      {rooms
-        .filter(item => {
-          return !item.isBooked;
-        })
-        .map(item => (
-          <div
-            key={item.id}
-            onClick={() => {
-              setSelectedRoom(item);
-            }}>
-            <RoomCard
-              name={item.name}
-              location={
-                item.roomAddress.city +
-                ',' +
-                item.roomAddress.state +
-                ',' +
-                item.roomAddress.country
-              }
-              previewImage={'http://127.0.0.1:8080/ipfs/' + item.images.img1}
-              price={'$' + item.price}
-            />
-          </div>
-        ))}
+      {rooms.map(item => (
+        <div
+          key={item.id}
+          onClick={() => {
+            setSelectedRoom(item);
+          }}>
+          <RoomCard
+            name={item.name}
+            location={
+              item.roomAddress.city +
+              ',' +
+              item.roomAddress.state +
+              ',' +
+              item.roomAddress.country
+            }
+            previewImage={'http://127.0.0.1:8080/ipfs/' + item.images.img1}
+            price={'$' + item.price}
+          />
+        </div>
+      ))}
     </Fragment>
   );
 };
