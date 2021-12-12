@@ -80,6 +80,19 @@ export async function bookRoom(room) {
   }
 }
 
+export async function getRoomWithId(id) {
+  const web3 = await getWeb3();
+  const contract = await initContract(RoomContract, web3);
+  try {
+    const room = await contract.methods.getRoom(id).call();
+    return room;
+  } catch (e) {
+    /* handle error */
+    console.error('api::Failed to get latest room', e);
+    throw 'FAILED TO Get rooms';
+  }
+}
+
 export async function getLatestRooms(page = 0) {
   const web3 = await getWeb3();
   const contract = await initContract(RoomContract, web3);
@@ -90,6 +103,23 @@ export async function getLatestRooms(page = 0) {
   } catch (e) {
     /* handle error */
     console.error('api::Failed to get latest room', e);
+    throw 'FAILED TO Get rooms';
+  }
+}
+
+export async function getBookedRooms() {
+  const web3 = await getWeb3();
+  const contract = await initContract(BookingsContract, web3);
+  const addresses = await web3.eth.getAccounts();
+
+  try {
+    const rooms = await contract.methods
+      .getPendingContractsBuyer(addresses[0])
+      .call();
+    return rooms;
+  } catch (e) {
+    /* handle error */
+    console.error('api::Failed to get bookings room', e);
     throw 'FAILED TO Get rooms';
   }
 }
