@@ -7,12 +7,13 @@ const LatestRooms = () => {
   const [rooms, setRooms] = useState([]);
   const [selectedRoom, setSelectedRoom] = useState();
   const uiSetSelectedRoom = useUiStore(state => state.setSelectedRoom);
+  const roomBooked = useUiStore(state => state.roomBooked);
 
   useEffect(() => {
     getLatestRooms().then(result => {
       setRooms(result);
     });
-  }, []);
+  }, [roomBooked]);
 
   useEffect(() => {
     if (selectedRoom) {
@@ -22,26 +23,30 @@ const LatestRooms = () => {
 
   return (
     <Fragment>
-      {rooms.map(item => (
-        <div
-          key={item.id}
-          onClick={() => {
-            setSelectedRoom(item);
-          }}>
-          <RoomCard
-            name={item.name}
-            location={
-              item.roomAddress.city +
-              ',' +
-              item.roomAddress.state +
-              ',' +
-              item.roomAddress.country
-            }
-            previewImage={'http://127.0.0.1:8080/ipfs/' + item.images.img1}
-            price={'$' + item.price}
-          />
-        </div>
-      ))}
+      {rooms
+        .filter(item => {
+          return !item.isBooked;
+        })
+        .map(item => (
+          <div
+            key={item.id}
+            onClick={() => {
+              setSelectedRoom(item);
+            }}>
+            <RoomCard
+              name={item.name}
+              location={
+                item.roomAddress.city +
+                ',' +
+                item.roomAddress.state +
+                ',' +
+                item.roomAddress.country
+              }
+              previewImage={'http://127.0.0.1:8080/ipfs/' + item.images.img1}
+              price={'$' + item.price}
+            />
+          </div>
+        ))}
     </Fragment>
   );
 };

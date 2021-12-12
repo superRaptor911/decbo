@@ -1,8 +1,19 @@
 /* eslint-disable react/prop-types */
 import {StyleSheet, css} from 'aphrodite';
 import React from 'react';
+import {bookRoom} from '../api/api';
+import {useUiStore} from '../store';
 
 const BookRoom = ({room}) => {
+  const setRoomBooked = useUiStore(state => state.setRoomBooked);
+  const handleBookPressed = async () => {
+    try {
+      await bookRoom(room);
+      setRoomBooked(room);
+    } catch (e) {
+      console.error('BookRoom::', e);
+    }
+  };
   return (
     <div className={css(styles.root)}>
       <div className={css(styles.heading)}>Shikara Hotel</div>
@@ -23,7 +34,9 @@ const BookRoom = ({room}) => {
           ',' +
           room.roomAddress.country}
       </div>
-      <button className={css(styles.button)}>BOOK NOW</button>
+      <button className={css(styles.button)} onClick={handleBookPressed}>
+        BOOK NOW
+      </button>
     </div>
   );
 };

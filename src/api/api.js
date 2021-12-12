@@ -1,6 +1,7 @@
 import {getWeb3, initContract, ipfs} from '../webInit';
 import UserContact from '../contracts/UserContact.json';
 import RoomContract from '../contracts/Rooms.json';
+import BookingsContract from '../contracts/Bookings.json';
 import {getArcanaStorage} from './arcanaAuth';
 
 export async function registerUser(username, email, phone) {
@@ -54,6 +55,28 @@ export async function addRoom(
     /* handle error */
     console.error('api::Failed to add room', e);
     throw 'FAILED TO Add Rooms';
+  }
+}
+
+export async function bookRoom(room) {
+  const web3 = await getWeb3();
+  const contract = await initContract(BookingsContract, web3);
+  const addresses = await web3.eth.getAccounts();
+
+  try {
+    await contract.methods
+      .createBooking(room.seller, room.id, room.price, {
+        time_createdOn: 1000,
+        time_bookedFrom: 100,
+        time_bookedTill: 100,
+      })
+      .send({
+        from: addresses[0],
+      });
+  } catch (e) {
+    /* handle error */
+    console.error('api::Failed to book room', e);
+    throw 'FAILED TO Book Rooms';
   }
 }
 

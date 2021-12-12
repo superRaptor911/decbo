@@ -13,6 +13,11 @@ let uistore = set => ({
   setSelectedRoom: room => {
     set({selectedRoom: room});
   },
+
+  roomBooked: null,
+  setRoomBooked: room => {
+    set({roomBooked: room, selectedRoom: null});
+  },
 });
 
 export const useStore = create(persist(store));
