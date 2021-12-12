@@ -44,7 +44,7 @@ export async function handleRedirect() {
 }
 
 export function getArcanaStorage() {
-  const userInfo = useStore.getState().arcanaUserInfo;
+  const userInfo = useStore.getState().arcanauserinfo;
   const storeInstance = new StorageProvider({
     appId: '226',
     privateKey: userInfo.privateKey,
