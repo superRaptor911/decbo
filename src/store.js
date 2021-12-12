@@ -6,6 +6,11 @@ let store = set => ({
   setarcanauserinfo: data => {
     set({arcanauserinfo: data});
   },
+
+  arcanaFiles: [],
+  setArcanaFiles: (id, arcanaFiles) => {
+    set({arcanaFiles: [...arcanaFiles, id]});
+  },
 });
 
 let uistore = set => ({
