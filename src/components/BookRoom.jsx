@@ -1,22 +1,28 @@
+/* eslint-disable react/prop-types */
 import {StyleSheet, css} from 'aphrodite';
 import React from 'react';
-import Lodge from '../media/images/lodge.png';
 
-const BookRoom = () => {
+const BookRoom = ({room}) => {
   return (
     <div className={css(styles.root)}>
       <div className={css(styles.heading)}>Shikara Hotel</div>
       <div className={css(styles.divider)}></div>
       <div className={css(styles.images)}>
-        <img src={Lodge} alt="room" className={css(styles.image)} />
+        <img
+          src={'http://127.0.0.1:8080/ipfs/' + room.images?.img1}
+          alt="room"
+          className={css(styles.image)}
+        />
       </div>
       <div className={css(styles.dHeading)}>Overview</div>
-      <div className={css(styles.desc)}>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor idfglabore et dolore magna aliqua. aaaaaaadedfghjnnmkmmkm. Read
-        More
+      <div className={css(styles.desc)}>{room.description}</div>
+      <div className={css(styles.location)}>
+        {room.roomAddress.city +
+          ',' +
+          room.roomAddress.state +
+          ',' +
+          room.roomAddress.country}
       </div>
-      <div className={css(styles.location)}>Location</div>
       <button className={css(styles.button)}>BOOK NOW</button>
     </div>
   );
