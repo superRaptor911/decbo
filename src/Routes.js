@@ -14,4 +14,7 @@ export const ROUTES = {
   addRoom: {
     path: '/addroom',
   },
+  account: {
+    path: '/account',
+  },
 };

@@ -4,6 +4,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom';
 import homeIcn from '../media/icons/homeIcn.png';
 import tick from "../media/icons/tick.png";
+import avatar from "../media/images/avatar.png"
 import sell from "../media/icons/seller.png"
 import { ROUTES } from '../Routes';
 
@@ -14,6 +15,10 @@ const LeftNav = () => {
         <div className={css(styles.root)}>
             <div className={css(styles.leftNav)}>
           <div className={css(styles.logo)}>Decbo</div>
+
+          <div className={css(styles.avatarSec)}>
+            <img src={avatar} alt="avatar" className={css(styles.avatar)} />
+          </div>
 
           <div className={css(styles.links)}>
 
@@ -58,13 +63,29 @@ const styles = StyleSheet.create({
         marginLeft: 75,
       },
       links: {
-        marginTop: 160,
+        // marginTop: 160,
         display: 'flex',
         flexDirection: 'column',
         rowGap: 33,
       },
-      link: {
-     
+      avatarSec:{
+        display: "flex",
+        background: "#FFFFFF",
+        boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+        width: 80,
+        height: 80,
+        borderRadius: "50%",
+        justifyContent: "center",
+        alignItems: "center",
+        cursor: "pointer",
+        margin: 40,
+        marginLeft: 80,
+        
+      },
+      avatar: {
+        width: 50,
+        height: 50,
+        margin: 5
       },
       navlink:{
         textDecoration: "none",

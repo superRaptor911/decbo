@@ -1,5 +1,6 @@
 import React from 'react';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import Account from './pages/Account';
 import AddRoom from './pages/AddRoom';
 import ArcanaRedirect from './pages/ArcanaRedirect';
 import Dashboard from './pages/Dashboard';
@@ -27,6 +28,10 @@ function App() {
 
           <Route exact path={ROUTES.addRoom.path}>
             <AddRoom />
+          </Route>
+
+          <Route exact path={ROUTES.account.path}>
+            <Account />
           </Route>
 
           <Route exact path={'/arcana'}>
