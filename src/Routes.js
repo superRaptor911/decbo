@@ -17,4 +17,7 @@ export const ROUTES = {
   account: {
     path: '/account',
   },
+  bookings: {
+    path: '/bookings',
+  },
 };

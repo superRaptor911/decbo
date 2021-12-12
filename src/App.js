@@ -6,6 +6,7 @@ import ArcanaRedirect from './pages/ArcanaRedirect';
 import Dashboard from './pages/Dashboard';
 import GithApp from './pages/GithApp';
 import Home from './pages/Home';
+import MyBookings from './pages/MyBookings';
 import Register from './pages/Register';
 import {ROUTES} from './Routes';
 
@@ -32,6 +33,9 @@ function App() {
 
           <Route exact path={ROUTES.account.path}>
             <Account />
+          </Route>
+          <Route exact path={ROUTES.bookings.path}>
+            <MyBookings />
           </Route>
 
           <Route exact path={'/arcana'}>
